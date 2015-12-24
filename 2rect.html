@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<canvas id="canvas" style="margin:0 auto;">
+		The current browser does not support Canvas, can replace the browser a try!
+	</canvas>
+
+	<script>
+
+		// 绘制矩形
+		function drawRect(ctx,x,y,width,height,borderWidth,borderColor,fillColor){
+			
+			ctx.beginPath();
+			ctx.rect(x,y,width,height)  //直接绘制矩形
+			ctx.closePath();
+
+			ctx.lineWidth = borderWidth;
+			ctx.strokeStyle = borderColor;
+			ctx.fillStyle = fillColor;
+
+			ctx.fill();
+			ctx.stroke();
+
+		}
+
+		function drawRect2(ctx,x,y,width,height,borderWidth,borderColor,fillColor){
+
+			ctx.lineWidth = borderWidth;
+			ctx.strokeStyle = borderColor;
+			ctx.fillStyle = fillColor;
+
+			ctx.fillRect(x,y,width,height);
+			ctx.strokeRect(x,y,width,height);
+
+		}
+
+		window.onload = function(){
+			var canvas = document.getElementById('canvas');
+
+			canvas.width = 1024;
+			canvas.height = 768;
+
+			if(canvas.getContext('2d')){
+				var context = canvas.getContext('2d');
+
+				drawRect(context,100,100,400,400,10,"blue","yellow")
+				drawRect2(context,300,300,400,400,10,"red","rgba(0,255,0,0.8)") //后绘制的填充色图形会对前面的图形进行遮挡
+
+			}else{
+				alert('当前游览器不支持Canvas，请更换游览器后再试！');
+			}
+		}
+	</script>
+</body>
+</html>
